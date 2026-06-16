@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PsicoApp IA</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🧠 PsicoApp</h1>
+        <button id="themeBtn">🌙</button>
+    </header>
+
+    <div id="status" class="status">
+        Listo para conversar...
+    </div>
+
+    <div id="chat" class="chat"></div>
+
+    <form id="chatForm">
+
+        <textarea
+            id="message"
+            placeholder="Escribe tu mensaje..."
+            required
+        ></textarea>
+
+        <button type="submit">
+            Enviar
+        </button>
+
+    </form>
+
+    <div class="actions">
+
+        <button id="exportBtn">
+            Exportar TXT
+        </button>
+
+        <button id="clearBtn">
+            Borrar historial
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

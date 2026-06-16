@@ -1,0 +1,13 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">PsicoApp logo</title>
+  <desc id="logoDesc">Icono moderno con letra P en degradado azul.</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4b83ff" />
+      <stop offset="100%" stop-color="#1d56d7" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="32" fill="url(#grad)" />
+  <path d="M39 36h24c11.046 0 20 8.954 20 20v36c0 11.046-8.954 20-20 20H39" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M39 36v56c0 11.046 8.954 20 20 20h30" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

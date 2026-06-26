@@ -1,92 +1,73 @@
-const GEMINI_API_KEY = "TU_API_KEY";
+const GEMINI_API_KEY =
+"";
 
-const API_URL =`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const API_URL =
+`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-const chat = document.getElementById("chat");
-const form = document.getElementById("chatForm");
-const messageInput = document.getElementById("message");
-const statusBar = document.getElementById("status");
+const form =
+document.getElementById("chatForm");
 
-let messages =
-JSON.parse(localStorage.getItem("chat")) || [];
+const messageInput =
+document.getElementById("message");
 
-renderMessages();
+const statusBar =
+document.getElementById("status");
 
-function saveMessages(){
-    localStorage.setItem(
-        "chat",
-        JSON.stringify(messages)
-    );
-}
+const exportBtn =
+document.getElementById("exportBtn");
 
-function addMessage(role,text){
+const clearBtn =
+document.getElementById("clearBtn");
 
-    messages.push({
-        role,
-        text
-    });
+const newChatBtn =
+document.getElementById("newChatBtn");
 
-    saveMessages();
-    renderMessages();
-}
+async function askGemini(prompt) {
 
-function renderMessages(){
+    const history =
+    messages
+        .slice(-10)
+        .map(
+            m =>
+            `${m.role}: ${m.text}`
+        )
+        .join("\n");
 
-    chat.innerHTML="";
-
-    messages.forEach(msg=>{
-
-        const div=document.createElement("div");
-
-        div.className=
-        `message ${msg.role}`;
-
-        div.innerHTML=
-        `<span>${msg.text}</span>`;
-
-        chat.appendChild(div);
-
-    });
-
-    chat.scrollTop=
-    chat.scrollHeight;
-}
-
-async function askGemini(prompt){
-
-    const response=
-    await fetch(API_URL,{
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
+    const response =
+    await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type":
+            "application/json"
         },
-
-        body:JSON.stringify({
-
-            contents:[
+        body: JSON.stringify({
+            contents: [
                 {
-                    parts:[
+                    parts: [
                         {
                             text:
-`Actúa como un psicólogo profesional.
+`
+Actúa como un psicólogo profesional.
 Responde con empatía.
 
+Conversación:
+
+${history}
+
 Usuario:
-${prompt}`
+${prompt}
+`
                         }
                     ]
                 }
             ]
-
         })
     });
 
-    const data=
+    const data =
     await response.json();
 
-    if(!response.ok){
-
+    if (!response.ok) {
         throw new Error(
             data.error.message
         );
@@ -101,25 +82,28 @@ ${prompt}`
 
 form.addEventListener(
 "submit",
-async e=>{
+async e => {
 
     e.preventDefault();
 
-    const text=
+    const text =
     messageInput.value.trim();
 
-    if(!text) return;
+    if (!text) return;
 
-    addMessage("user",text);
+    addMessage(
+        "user",
+        text
+    );
 
-    messageInput.value="";
+    messageInput.value = "";
 
-    statusBar.textContent=
-    "Pensando...";
+    statusBar.textContent =
+    "La IA está pensando...";
 
-    try{
+    try {
 
-        const response=
+        const response =
         await askGemini(text);
 
         addMessage(
@@ -127,14 +111,18 @@ async e=>{
             response
         );
 
-        statusBar.textContent=
+        statusBar.textContent =
         "Respuesta recibida";
 
-    }catch(error){
-
-        statusBar.textContent=
-        error.message;
-
     }
+    catch (error) {
 
+        addMessage(
+            "ai",
+            "❌ " + error.message
+        );
+
+        statusBar.textContent =
+        "Error";
+    }
 });

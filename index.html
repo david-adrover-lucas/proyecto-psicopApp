@@ -1,56 +1,101 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PsicoApp IA</title>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<link rel="stylesheet" href="css/style.css">
+    <title>PsicoApp IA</title>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-    <header>
-        <h1>🧠 PsicoApp</h1>
-        <button id="themeBtn">🌙</button>
-    </header>
+    <aside class="sidebar">
 
-    <div id="status" class="status">
-        Listo para conversar...
-    </div>
-
-    <div id="chat" class="chat"></div>
-
-    <form id="chatForm">
-
-        <textarea
-            id="message"
-            placeholder="Escribe tu mensaje..."
-            required
-        ></textarea>
-
-        <button type="submit">
-            Enviar
+        <button id="newChatBtn">
+            ➕ Nuevo Chat
         </button>
 
-    </form>
-
-    <div class="actions">
-
-        <button id="exportBtn">
-            Exportar TXT
+        <button id="themeBtn">
+            🌙 
         </button>
 
-        <button id="clearBtn">
-            Borrar historial
-        </button>
+    </aside>
 
-    </div>
+    <main class="main">
+
+        <header class="chat-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    🧠
+                </div>
+
+                <span>
+                    PsicoApp IA
+                </span>
+            </div>
+            <div>
+                <h2>Psicólogo Virtual</h2>
+                <p>Estoy aquí para escucharte.</p>
+            </div>
+
+            <div id="status">
+                Listo para conversar...
+            </div>
+
+        </header>
+
+        <div id="chat" class="chat">
+
+        </div>
+
+        <form
+            id="chatForm"
+            class="chat-input"
+        >
+
+            <textarea
+                id="message"
+                placeholder="Escribe cómo te sientes..."
+                required
+            ></textarea>
+
+            <div class="actions">
+
+                <button
+                    id="exportBtn"
+                    type="button"
+                >
+                    📄 Exportar
+                </button>
+
+                <button
+                    id="clearBtn"
+                    type="button"
+                >
+                    🗑 Borrar
+                </button>
+
+                <button type="submit">
+                    ➤ Enviar
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
 
 </div>
 
+<script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/chat.js"></script>
 <script src="js/app.js"></script>
 
 </body>

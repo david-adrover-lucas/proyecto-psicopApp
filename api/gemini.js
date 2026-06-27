@@ -1,15 +1,17 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Método no permitido' });
+    res.statusCode = 405;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify({ error: 'Método no permitido' }));
     return;
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    res.status(500).json({
-      error: 'GEMINI_API_KEY no está configurada en el despliegue.'
-    });
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify({ error: 'GEMINI_API_KEY no está configurada en el despliegue.' }));
     return;
   }
 
@@ -32,13 +34,13 @@ export default async function handler(req, res) {
       );
 
       const responseText = await response.text();
-      res.status(response.status);
+      res.statusCode = response.status;
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.end(responseText);
     } catch (error) {
-      res.status(500).json({
-        error: error.message || 'Error al contactar con Gemini.'
-      });
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify({ error: error.message || 'Error al contactar con Gemini.' }));
     }
   });
-}
+};

@@ -1,8 +1,5 @@
-const GEMINI_API_KEY =
-window.GEMINI_API_KEY || "";
-
 const API_URL =
-`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+"/api/gemini";
 
 const form =
 document.getElementById("chatForm");
@@ -23,12 +20,6 @@ const newChatBtn =
 document.getElementById("newChatBtn");
 
 async function askGemini(prompt) {
-
-    if (!GEMINI_API_KEY) {
-        throw new Error(
-            "Falta la clave de Gemini. Añádela como secreto en GitHub para que la app funcione en el despliegue."
-        );
-    }
 
     const history =
     messages
